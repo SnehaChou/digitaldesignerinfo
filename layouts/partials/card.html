@@ -1,0 +1,27 @@
+{{ $entries := where .Pages "Kind" "page" }}
+<article class="archive-card">
+  <a class="card-image" href="{{ .RelPermalink }}" aria-label="Open {{ .Title }}">
+    {{ with .Params.cover_image }}
+      <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+    {{ else }}
+      <div class="image-fallback" aria-hidden="true"></div>
+    {{ end }}
+  </a>
+  <div class="card-copy">
+    <p class="card-kicker">
+      {{ with .Params.breadcrumb }}
+        {{ delimit . " / " }}
+      {{ else }}
+        {{ .Section }}
+      {{ end }}
+    </p>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ else }}{{ with .Summary }}<p>{{ . }}</p>{{ end }}{{ end }}
+    <p class="entry-count">{{ len $entries }} entries</p>
+    {{ with .Params.tags }}
+      <div class="mini-tags">
+        {{ range first 4 . }}<a href="{{ printf "tags/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</article>

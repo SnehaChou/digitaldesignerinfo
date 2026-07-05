@@ -1,0 +1,50 @@
+{{ define "main" }}
+  {{ $collections := where site.Pages "Params.collection" true }}
+  {{ $entries := where site.RegularPages "Section" "in" (slice "stores" "people") }}
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Personal design library</p>
+      <h1>Curated stores and people, organized into visual lists.</h1>
+      <p class="intro">Browse flat collections like stores / objects / textile or people / textile artists, each with compact saved entries, photos, links, and tags.</p>
+    </div>
+    <div class="hero-panel" aria-label="Archive summary">
+      <div>
+        <span class="stat">{{ len $collections }}</span>
+        <span class="stat-label">collections</span>
+      </div>
+      <div>
+        <span class="stat">{{ len $entries }}</span>
+        <span class="stat-label">saved entries</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-bar" aria-label="Browse sections">
+    <a href="{{ "stores/" | relURL }}">Stores</a>
+    <a href="{{ "people/" | relURL }}">People</a>
+  </section>
+
+  <section class="archive-section">
+    <div class="section-heading">
+      <p class="eyebrow">Shelf</p>
+      <h2>Stores</h2>
+    </div>
+    <div class="masonry-grid">
+      {{ range (where $collections "Section" "stores").ByTitle }}
+        {{ partial "card.html" . }}
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="archive-section">
+    <div class="section-heading">
+      <p class="eyebrow">Shelf</p>
+      <h2>People</h2>
+    </div>
+    <div class="masonry-grid">
+      {{ range (where $collections "Section" "people").ByTitle }}
+        {{ partial "card.html" . }}
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

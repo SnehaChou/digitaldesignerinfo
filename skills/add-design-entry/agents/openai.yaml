@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Design Entry"
+  short_description: "Add archive entries from links"
+  default_prompt: "Use $add-design-entry to add this website or Instagram link to my design archive."

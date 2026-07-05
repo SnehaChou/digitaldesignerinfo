@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ site.Params.description }}">
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav-wrap" aria-label="Main navigation">
+        <a class="brand" href="{{ site.Home.RelPermalink }}">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>{{ site.Title }}</span>
+        </a>
+        <div class="nav-links">
+          {{ range site.Menus.main }}
+            <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+          {{ end }}
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer">
+      <p>Private-first archive. Credit original designers, photographers, artists, and sources before publishing.</p>
+    </footer>
+  </body>
+</html>

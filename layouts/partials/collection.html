@@ -1,0 +1,36 @@
+{{ $entries := where .Pages "Kind" "page" }}
+<article class="detail">
+  <header class="detail-header">
+    <div>
+      <p class="eyebrow">
+        {{ with .Params.breadcrumb }}{{ delimit . " / " }}{{ else }}{{ .Title }}{{ end }}
+      </p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="intro">{{ . }}</p>{{ end }}
+    </div>
+    <div class="collection-count">
+      <span class="stat">{{ len $entries }}</span>
+      <span class="stat-label">entries</span>
+    </div>
+  </header>
+
+  {{ with .Params.cover_image }}
+    <figure class="collection-cover">
+      <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+    </figure>
+  {{ end }}
+
+  {{ with .Content }}
+    <div class="notes collection-notes">
+      {{ . }}
+    </div>
+  {{ end }}
+
+  <section class="entry-grid" aria-label="{{ .Title }} entries">
+    {{ range $entries.ByTitle }}
+      {{ partial "entry-card.html" . }}
+    {{ else }}
+      <p class="empty-note">No entries saved in this collection yet.</p>
+    {{ end }}
+  </section>
+</article>

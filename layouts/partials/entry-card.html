@@ -1,0 +1,22 @@
+<article class="entry-card">
+  {{ with .Params.photo }}
+    <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+  {{ else }}
+    <div class="image-fallback" aria-hidden="true"></div>
+  {{ end }}
+  <div class="entry-copy">
+    <h2>{{ .Title }}</h2>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ else }}{{ with .Summary }}<p>{{ . }}</p>{{ end }}{{ end }}
+    {{ with .Params.location }}<p class="entry-location">{{ . }}</p>{{ end }}
+    <div class="card-meta">
+      {{ with .Params.website }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Website</a>{{ end }}
+      {{ with .Params.instagram }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Instagram</a>{{ end }}
+      <a href="{{ .RelPermalink }}">Notes</a>
+    </div>
+    {{ with .Params.tags }}
+      <div class="mini-tags">
+        {{ range . }}<a href="{{ printf "tags/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</article>

@@ -1,0 +1,32 @@
+{{ define "main" }}
+  <article class="detail entry-detail">
+    <header class="detail-header">
+      <div>
+        <p class="eyebrow">{{ .CurrentSection.Title }}</p>
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.description }}<p class="intro">{{ . }}</p>{{ end }}
+      </div>
+      <div class="detail-actions">
+        {{ with .Params.instagram }}<a class="button" href="{{ . }}" target="_blank" rel="noopener noreferrer">Instagram</a>{{ end }}
+        {{ with .Params.website }}<a class="button secondary" href="{{ . }}" target="_blank" rel="noopener noreferrer">Website</a>{{ end }}
+      </div>
+    </header>
+
+    <section class="entry-detail-body">
+      {{ with .Params.photo }}
+        <figure class="collection-cover">
+          <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+        </figure>
+      {{ end }}
+      <div class="notes">
+        {{ with .Params.location }}<p><strong>Location:</strong> {{ . }}</p>{{ end }}
+        {{ .Content }}
+        {{ with .Params.tags }}
+          <div class="mini-tags">
+            {{ range . }}<a href="{{ printf "tags/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </section>
+  </article>
+{{ end }}

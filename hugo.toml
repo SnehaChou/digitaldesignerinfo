@@ -1,0 +1,24 @@
+baseURL = "https://snehachou.github.io/digitaldesignerinfo/"
+locale = "en-us"
+title = "Design Moodboard Archive"
+copyright = "Private personal archive"
+
+[params]
+  description = "A private-first archive of curated stores, people, makers, sources, links, notes, and visual references."
+  owner = "Sneha"
+
+[taxonomies]
+  tag = "tags"
+
+[menus]
+  [[menus.main]]
+    name = "Stores"
+    pageRef = "/stores"
+    weight = 10
+  [[menus.main]]
+    name = "People"
+    pageRef = "/people"
+    weight = 20
+
+[markup.goldmark.renderer]
+  unsafe = true
